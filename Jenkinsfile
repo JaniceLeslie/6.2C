@@ -4,6 +4,7 @@ pipeline {
         DIRECTORY_PATH = 'C:/ProgramData/Jenkins/.jenkins/workspace/5.1p'
         TESTING_ENVIRONMENT = 'test-env'
         PRODUCTION_ENVIRONMENT = 'Janice'
+        EMAIL_RECIPIENT = '30568janiceleslie74@gmail.com'
     }
     stages {
         stage('Build') {
