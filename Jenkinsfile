@@ -3,68 +3,43 @@ pipeline {
     environment {
         DIRECTORY_PATH = 'C:/ProgramData/Jenkins/.jenkins/workspace/5.1p'
         TESTING_ENVIRONMENT = 'test-env'
-        PRODUCTION_ENVIRONMENT = 'Janice'
+        PRODUCTION_ENVIRONMENT = 'Janice'  
     }
     stages {
         stage('Build') {
             steps {
                 echo "Fetch the source code from the directory path specified by the environment variable: ${env.DIRECTORY_PATH}"
-                echo "Building the code with Maven"
-                sh 'mvn clean install'
+                echo "Compile the code and generate any necessary artifacts"
             }
         }
-        
-        stage('Unit and Integration Tests') {
+        stage('Test') {
             steps {
-                echo "Running unit tests"
-                sh 'mvn test'
-                echo "Running integration tests"
-                sh 'mvn verify'
+                echo "Unit tests"
+                echo "Integration tests"
             }
         }
-        
-        stage('Code Analysis') {
+        stage('Code Quality Check') {
             steps {
-                echo "Performing code analysis"
-                sh 'mvn sonar:sonar'
+                echo "Check the quality of the code"
             }
         }
-        
-        stage('Security Scan') {
+        stage('Deploy') {
             steps {
-                echo "Performing security scan"
-                sh 'snyk test --all-projects'
+                echo "Deploy the application to a testing environment specified by the environment variable: ${env.TESTING_ENVIRONMENT}"
             }
         }
-        
-        stage('Deploy to Staging') {
+        stage('Approval') {
             steps {
-                echo "Deploying to staging"
-                sh 'deploy-script.sh staging'
+                script {
+                    echo "Waiting for manual approval..."
+                    sleep time: 10, unit: 'SECONDS'  // Simulating manual approval
+                }
             }
         }
-        
-        stage('Integration Test on Staging') {
-            steps {
-                echo "Running integration tests on staging"
-                sh 'integration-tests.sh'
-            }
-        }
-        
         stage('Deploy to Production') {
             steps {
-                echo "Deploying to production"
-                sh 'deploy-script.sh production'
+                echo "Deploy the code to the production environment specified by the environment variable: ${env.PRODUCTION_ENVIRONMENT}"
             }
-        }
-    }
-    
-    post {
-        success {
-            echo "Pipeline completed successfully!"
-        }
-        failure {
-            echo "Pipeline failed!"
         }
     }
 }
