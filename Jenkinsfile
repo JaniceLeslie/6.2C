@@ -4,7 +4,6 @@ pipeline {
         DIRECTORY_PATH = 'C:/ProgramData/Jenkins/.jenkins/workspace/5.1p'
         TESTING_ENVIRONMENT = 'test-env'
         PRODUCTION_ENVIRONMENT = 'Janice'
-        EMAIL_RECIPIENT = '30568janiceleslie74@gmail.com'  
     }
     stages {
         stage('Build') {
@@ -27,10 +26,10 @@ pipeline {
                 // sh 'mvn verify'
             }
             post {
-                always {
-                    mail bcc: '', body: "Stage: Unit and Integration Tests\nStatus: ${currentBuild.currentResult}\nPlease find the logs attached.", 
-                         subject: "Pipeline: Unit and Integration Tests ${currentBuild.currentResult}", 
-                         to: "${EMAIL_RECIPIENT}", attachLog: true
+                success {
+                    mail to : "30568janiceleslie74@gmail.com",
+                        subject: "Unit and Integration Tests",
+                        body: "Unit and Integration Test was successful"
                 }
             }
         }
@@ -53,11 +52,12 @@ pipeline {
                 // Example command for Snyk (not executed here)
                 // sh 'snyk test --all-projects'
             }
-            post {
-                always {
-                    mail bcc: '', body: "Stage: Security Scan\nStatus: ${currentBuild.currentResult}\nPlease find the logs attached.", 
-                         subject: "Pipeline: Security Scan ${currentBuild.currentResult}", 
-                         to: "${EMAIL_RECIPIENT}", attachLog: true
+             post {
+                success {
+                    mail to : "30568janiceleslie74@gmail.com",
+                        subject: "Security scan",
+                        body: "Security scan is successful.."
+                }
                 }
             }
         }
