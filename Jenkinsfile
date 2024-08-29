@@ -28,7 +28,7 @@ pipeline {
                 always{
                     mail bcc: '', body: "Stage: Unit and Integration tests \nStatus: ${currentBuild.currentResult}\nPlease find the logs attached.",
                         subject: "Pipeline: Unit and Integration Tests ${currentBuild.currentResult}",
-                        to: "${EMAIL_RECIPIENT}",attachLog: true
+                        to: "${EMAIL_RECIPIENT}", attachLog: true
                 }
             }
                     
@@ -54,7 +54,7 @@ pipeline {
                 always{
                     mail bcc: '', body: "Stage: Security Scan\nStatus: ${currentBuild.currentResult}\nPlease find the logs attached.",
                         subject: "Pipeline: Security Scan ${currentBuild.currentResult}",
-                        to: "${EMAIL_RECIPIENT}",attachLog: true
+                        to: "${EMAIL_RECIPIENT}", attachLog: true
                 }
             }
         }
