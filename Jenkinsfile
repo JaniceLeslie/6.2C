@@ -27,9 +27,9 @@ pipeline {
             }
             post {
                 success {
-                    mail to : "30568janiceleslie74@gmail.com",
+                    mail to: "30568janiceleslie74@gmail.com",
                         subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test was successful"
+                        body: "Unit and Integration Test was successful."
                 }
             }
         }
@@ -52,12 +52,11 @@ pipeline {
                 // Example command for Snyk (not executed here)
                 // sh 'snyk test --all-projects'
             }
-             post {
+            post {
                 success {
-                    mail to : "30568janiceleslie74@gmail.com",
-                        subject: "Security scan",
-                        body: "Security scan is successful.."
-                }
+                    mail to: "30568janiceleslie74@gmail.com",
+                        subject: "Security Scan",
+                        body: "Security scan was successful."
                 }
             }
         }
@@ -101,4 +100,4 @@ pipeline {
             echo "Pipeline failed!"
         }
     }
-
+}
