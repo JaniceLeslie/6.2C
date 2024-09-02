@@ -15,7 +15,7 @@ pipeline {
                 // sh 'mvn clean install'
             }
         }
-
+        
         stage('Unit and Integration Tests') {
             steps {
                 echo "Stage 2: Unit and Integration Tests"
@@ -24,37 +24,23 @@ pipeline {
                 // Example commands (not executed here)
                 // sh 'mvn test'
                 // sh 'mvn verify'
-
-                // Simulate test execution and log generation (replace with your actual test commands)
-                sh '''
-                    echo "This is a simulated test log." > test.log
-                    # Add more commands to simulate your test execution and generate logs if needed
-                '''
             }
             post {
-                always {
-                    // Archive the simulated test log
-                    archiveArtifacts artifacts: 'test.log', fingerprint: true 
-                }
                 success {
-                    emailext (
-                        to: "30568janiceleslie74@gmail.com",
+                    mail to: "30568janiceleslie74@gmail.com",
                         subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test was successful.",
-                        attachmentsPattern: 'test.log' // Attach the simulated test log
-                    )
+                        body: "Unit and Integration Test was successful."
+                        //attachmentsPattern: 'test.log'
                 }
-                failure {
-                    emailext (
-                        to: "30568janiceleslie74@gmail.com",
+                failure{
+                    mail to: "30568janiceleslie74@gmail.com",
                         subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test failed",
-                        attachmentsPattern: 'test.log' // Attach the simulated test log
-                    )
+                        body: "Unit and Integration Test failed"
+                        //attachmentsPattern: 'test.log'
                 }
             }
         }
-
+        
         stage('Code Analysis') {
             steps {
                 echo "Stage 3: Code Analysis"
@@ -62,22 +48,9 @@ pipeline {
                 echo "Tool: SonarQube"
                 // Example command for SonarQube (not executed here)
                 // sh 'mvn sonar:sonar'
-
-                // Simulate code analysis and log generation (replace with your actual analysis commands)
-                sh '''
-                    echo "This is a simulated code analysis log." > analysis.log
-                    # Add more commands to simulate your code analysis and generate logs if needed
-                '''
-            }
-            post {
-                always {
-                    // Archive the simulated analysis log and attach the build log if the stage fails
-                    archiveArtifacts artifacts: 'analysis.log', fingerprint: true
-                    attachLog: true 
-                }
             }
         }
-
+        
         stage('Security Scan') {
             steps {
                 echo "Stage 4: Security Scan"
@@ -85,38 +58,23 @@ pipeline {
                 echo "Tool: Snyk"
                 // Example command for Snyk (not executed here)
                 // sh 'snyk test --all-projects'
-
-                // Simulate security scan and log generation (replace with your actual scan commands)
-                sh '''
-                    echo "This is a simulated security scan log." > security.log
-                    # Add more commands to simulate your security scan and generate logs if needed
-                '''
             }
             post {
-                always {
-                    // Archive the simulated security log and attach the build log if the stage fails
-                    archiveArtifacts artifacts: 'security.log', fingerprint: true
-                    attachLog: true 
-                }
                 success {
-                    emailext (
-                        to: "30568janiceleslie74@gmail.com",
+                    mail to: "30568janiceleslie74@gmail.com",
                         subject: "Security Scan",
-                        body: "Security scan was successful.",
-                        attachmentsPattern: 'security.log' // Attach the simulated security log
-                    )
+                        body: "Security scan was successful."
+                        //attachmentsPattern: 'test.log'
                 }
-                failure {
-                    emailext (
-                        to: "30568janiceleslie74@gmail.com",
-                        subject: "Security Scan",
-                        body: "Security Scan failed",
-                        attachmentsPattern: 'security.log' // Attach the simulated security log
-                    )
+                failure{
+                    mail to: "30568janiceleslie74@gmail.com",
+                        subject: "Unit and Integration Tests",
+                        body: "Unit and Integration Test failed"
+                        //attachmentsPattern: 'test.log'
                 }
             }
         }
-
+        
         stage('Deploy to Staging') {
             steps {
                 echo "Stage 5: Deploy to Staging"
@@ -124,22 +82,9 @@ pipeline {
                 echo "Tool: Custom deployment script (e.g., deploy-script.sh)"
                 // Example command for deployment (not executed here)
                 // sh 'deploy-script.sh staging'
-
-                // Simulate deployment to staging and log generation (replace with your actual deployment commands)
-                sh '''
-                    echo "This is a simulated deployment to staging log." > staging-deploy.log
-                    # Add more commands to simulate your deployment and generate logs if needed
-                '''
-            }
-            post {
-                always {
-                    // Archive the simulated staging deployment log and attach the build log if the stage fails
-                    archiveArtifacts artifacts: 'staging-deploy.log', fingerprint: true 
-                    attachLog: true 
-                }
             }
         }
-
+        
         stage('Integration Test on Staging') {
             steps {
                 echo "Stage 6: Integration Test on Staging"
@@ -147,22 +92,9 @@ pipeline {
                 echo "Tool: Custom integration test script (e.g., integration-tests.sh)"
                 // Example command for integration testing (not executed here)
                 // sh 'integration-tests.sh'
-
-                // Simulate integration tests on staging and log generation (replace with your actual test commands)
-                sh '''
-                    echo "This is a simulated integration test on staging log." > staging-integration-test.log
-                    # Add more commands to simulate your integration tests and generate logs if needed
-                '''
-            }
-            post {
-                always {
-                    // Archive the simulated staging integration test log and attach the build log if the stage fails
-                    archiveArtifacts artifacts: 'staging-integration-test.log', fingerprint: true 
-                    attachLog: true 
-                }
             }
         }
-
+        
         stage('Deploy to Production') {
             steps {
                 echo "Stage 7: Deploy to Production"
@@ -170,23 +102,10 @@ pipeline {
                 echo "Tool: Custom deployment script (e.g., deploy-script.sh)"
                 // Example command for production deployment (not executed here)
                 // sh 'deploy-script.sh production'
-
-                // Simulate deployment to production and log generation (replace with your actual deployment commands)
-                sh '''
-                    echo "This is a simulated deployment to production log." > production-deploy.log
-                    # Add more commands to simulate your deployment and generate logs if needed
-                '''
-            }
-            post {
-                always {
-                    // Archive the simulated production deployment log and attach the build log if the stage fails
-                    archiveArtifacts artifacts: 'production-deploy.log', fingerprint: true 
-                    attachLog: true 
-                }
             }
         }
     }
-
+    
     post {
         success {
             echo "Pipeline completed successfully!"
