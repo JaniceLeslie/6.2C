@@ -29,13 +29,17 @@ pipeline {
                 success {
                     mail to: "30568janiceleslie74@gmail.com",
                         subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test was successful."
+                        body: "Unit and Integration Test was successful.",
+                        attachLog: true, // Attach the build log
+                        attachmentsPattern: 'test.log' 
                         //attachmentsPattern: 'test.log'
                 }
                 failure{
                     mail to: "30568janiceleslie74@gmail.com",
                         subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test failed"
+                        body: "Unit and Integration Test failed",
+                        attachLog: true, // Attach the build log
+                        attachmentsPattern: 'test.log' 
                         //attachmentsPattern: 'test.log'
                 }
             }
@@ -63,13 +67,17 @@ pipeline {
                 success {
                     mail to: "30568janiceleslie74@gmail.com",
                         subject: "Security Scan",
-                        body: "Security scan was successful."
+                        body: "Security scan was successful.",
+                        attachLog: true, // Attach the build log
+                        attachmentsPattern: 'test.log' 
                         //attachmentsPattern: 'test.log'
                 }
                 failure{
                     mail to: "30568janiceleslie74@gmail.com",
                         subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test failed"
+                        body: "Unit and Integration Test failed",
+                        attachLog: true, // Attach the build log
+                        attachmentsPattern: 'test.log' 
                         //attachmentsPattern: 'test.log'
                 }
             }
