@@ -27,16 +27,14 @@ pipeline {
             }
             post {
                 success {
-                    emailext to: "30568janiceleslie74@gmail.com",
-                        subject: "Unit and Integration Tests - SUCCESS",
-                        body: "Unit and Integration Tests completed successfully.",
-                        attachLog: true
+                    mail to: "30568janiceleslie74@gmail.com",
+                        subject: "Unit and Integration Tests",
+                        body: "Unit and Integration Test was successful."
                 }
-                failure {
-                    emailext to: "30568janiceleslie74@gmail.com",
-                        subject: "Unit and Integration Tests - FAILURE",
-                        body: "Unit and Integration Tests failed.",
-                        attachLog: true
+                failure{
+                    mail to: "30568janiceleslie74@gmail.com",
+                        subject: "Unit and Integration Tests",
+                        body: "Unit and Integration Test failed"
                 }
             }
         }
@@ -61,16 +59,14 @@ pipeline {
             }
             post {
                 success {
-                    emailext to: "30568janiceleslie74@gmail.com",
-                        subject: "Security Scan - SUCCESS",
-                        body: "Security scan completed successfully.",
-                        attachLog: true
+                    mail to: "30568janiceleslie74@gmail.com",
+                        subject: "Security Scan",
+                        body: "Security scan was successful."
                 }
-                failure {
-                    emailext to: "30568janiceleslie74@gmail.com",
-                        subject: "Security Scan - FAILURE",
-                        body: "Security scan failed.",
-                        attachLog: true
+                failure{
+                    mail to: "30568janiceleslie74@gmail.com",
+                        subject: "Unit and Integration Tests",
+                        body: "Unit and Integration Test failed"
                 }
             }
         }
