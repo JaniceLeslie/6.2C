@@ -27,19 +27,21 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
-                        to: "30568janiceleslie74@gmail.com",
-                        subject: "Unit and Integration Tests - Success",
-                        body: "Unit and Integration Test was successful.",
-                        attachLog: true
+                    emailext (
+                        to: '30568janiceleslie74@gmail.com',
+                        subject: 'Unit and Integration Tests - Success',
+                        body: 'The unit and integration tests have completed successfully.',
+                        attachLog: true, // Attach the build log
+                        compressLog: true // Optionally compress the log file
                     )
                 }
                 failure {
-                    emailext(
-                        to: "30568janiceleslie74@gmail.com",
-                        subject: "Unit and Integration Tests - Failure",
-                        body: "Unit and Integration Test failed.",
-                        attachLog: true
+                    emailext (
+                        to: '30568janiceleslie74@gmail.com',
+                        subject: 'Unit and Integration Tests - Failure',
+                        body: 'The unit and integration tests have failed.',
+                        attachLog: true, // Attach the build log
+                        compressLog: true // Optionally compress the log file
                     )
                 }
             }
@@ -65,19 +67,21 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
-                        to: "30568janiceleslie74@gmail.com",
-                        subject: "Security Scan - Success",
-                        body: "Security scan was successful.",
-                        attachLog: true
+                    emailext (
+                        to: '30568janiceleslie74@gmail.com',
+                        subject: 'Security Scan - Success',
+                        body: 'The security scan has completed successfully.',
+                        attachLog: true, // Attach the build log
+                        compressLog: true // Optionally compress the log file
                     )
                 }
                 failure {
-                    emailext(
-                        to: "30568janiceleslie74@gmail.com",
-                        subject: "Security Scan - Failure",
-                        body: "Security scan failed.",
-                        attachLog: true
+                    emailext (
+                        to: '30568janiceleslie74@gmail.com',
+                        subject: 'Security Scan - Failure',
+                        body: 'The security scan has failed.',
+                        attachLog: true, // Attach the build log
+                        compressLog: true // Optionally compress the log file
                     )
                 }
             }
@@ -123,4 +127,3 @@ pipeline {
         }
     }
 }
-
