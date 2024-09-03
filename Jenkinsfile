@@ -27,22 +27,26 @@ pipeline {
             }
             post {
                 success {
-                    emailext (
-                        to: '30568janiceleslie74@gmail.com',
-                        subject: 'Unit and Integration Tests - Success',
-                        body: 'The unit and integration tests have completed successfully.',
-                        attachLog: true, // Attach the build log
-                        compressLog: true // Optionally compress the log file
-                    )
+                    script {
+                        emailext(
+                            attachmentsPattern: '*.log',
+                            body: "Unit and Integration Tests were successful. Please check the attached log for details.",
+                            recipientProviders: [culprits(), developers()],
+                            subject: "Pipeline Success - Unit and Integration Tests",
+                            to: "30568janiceleslie74@gmail.com"
+                        )
+                    }
                 }
                 failure {
-                    emailext (
-                        to: '30568janiceleslie74@gmail.com',
-                        subject: 'Unit and Integration Tests - Failure',
-                        body: 'The unit and integration tests have failed.',
-                        attachLog: true, // Attach the build log
-                        compressLog: true // Optionally compress the log file
-                    )
+                    script {
+                        emailext(
+                            attachmentsPattern: '*.log',
+                            body: "Unit and Integration Tests failed. Please check the attached log for details.",
+                            recipientProviders: [culprits(), developers()],
+                            subject: "Pipeline Failed - Unit and Integration Tests",
+                            to: "30568janiceleslie74@gmail.com"
+                        )
+                    }
                 }
             }
         }
@@ -67,22 +71,26 @@ pipeline {
             }
             post {
                 success {
-                    emailext (
-                        to: '30568janiceleslie74@gmail.com',
-                        subject: 'Security Scan - Success',
-                        body: 'The security scan has completed successfully.',
-                        attachLog: true, // Attach the build log
-                        compressLog: true // Optionally compress the log file
-                    )
+                    script {
+                        emailext(
+                            attachmentsPattern: '*.log',
+                            body: "Security Scan was successful. Please check the attached log for details.",
+                            recipientProviders: [culprits(), developers()],
+                            subject: "Pipeline Success - Security Scan",
+                            to: "30568janiceleslie74@gmail.com"
+                        )
+                    }
                 }
                 failure {
-                    emailext (
-                        to: '30568janiceleslie74@gmail.com',
-                        subject: 'Security Scan - Failure',
-                        body: 'The security scan has failed.',
-                        attachLog: true, // Attach the build log
-                        compressLog: true // Optionally compress the log file
-                    )
+                    script {
+                        emailext(
+                            attachmentsPattern: '*.log',
+                            body: "Security Scan failed. Please check the attached log for details.",
+                            recipientProviders: [culprits(), developers()],
+                            subject: "Pipeline Failed - Security Scan",
+                            to: "30568janiceleslie74@gmail.com"
+                        )
+                    }
                 }
             }
         }
@@ -120,10 +128,28 @@ pipeline {
     
     post {
         success {
-            echo "Pipeline completed successfully!"
+            script {
+                // Send email notification for successful pipeline
+                emailext(
+                    attachmentsPattern: '*.log',
+                    body: "Pipeline completed successfully. Please check the attached log for details.",
+                    recipientProviders: [culprits(), developers()],
+                    subject: "Pipeline Success",
+                    to: "30568janiceleslie74@gmail.com"
+                )
+            }
         }
         failure {
-            echo "Pipeline failed!"
+            script {
+                // Send email notification for failed pipeline
+                emailext(
+                    attachmentsPattern: '*.log',
+                    body: "Pipeline failed. Please check the attached log for details.",
+                    recipientProviders: [culprits(), developers()],
+                    subject: "Pipeline Failed",
+                    to: "30568janiceleslie74@gmail.com"
+                )
+            }
         }
     }
 }
