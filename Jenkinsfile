@@ -30,7 +30,7 @@ pipeline {
                     mail to: "30568janiceleslie74@gmail.com",
                         subject: "Unit and Integration Tests",
                         body: "Unit and Integration Test was successful.",
-                        attachmentsPattern: 'target/surefire-reports/*.xml' 
+                        attachmentsPattern: 'test.log'
                         
                 }
                 failure{
