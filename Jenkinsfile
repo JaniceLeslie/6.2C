@@ -27,17 +27,20 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "30568janiceleslie74@gmail.com",
-                        subject: "Unit and Integration Tests",
+                    emailext(
+                        to: "30568janiceleslie74@gmail.com",
+                        subject: "Unit and Integration Tests - Success",
                         body: "Unit and Integration Test was successful.",
-                        attachmentsPattern: 'test.log'
-                        
+                        attachLog: true
+                    )
                 }
-                failure{
-                    mail to: "30568janiceleslie74@gmail.com",
-                        subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test failed"
-                        //attachmentsPattern: 'test.log'
+                failure {
+                    emailext(
+                        to: "30568janiceleslie74@gmail.com",
+                        subject: "Unit and Integration Tests - Failure",
+                        body: "Unit and Integration Test failed.",
+                        attachLog: true
+                    )
                 }
             }
         }
@@ -62,16 +65,20 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "30568janiceleslie74@gmail.com",
-                        subject: "Security Scan",
-                        body: "Security scan was successful."
-                        //attachmentsPattern: 'test.log'
+                    emailext(
+                        to: "30568janiceleslie74@gmail.com",
+                        subject: "Security Scan - Success",
+                        body: "Security scan was successful.",
+                        attachLog: true
+                    )
                 }
-                failure{
-                    mail to: "30568janiceleslie74@gmail.com",
-                        subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test failed"
-                        //attachmentsPattern: 'test.log'
+                failure {
+                    emailext(
+                        to: "30568janiceleslie74@gmail.com",
+                        subject: "Security Scan - Failure",
+                        body: "Security scan failed.",
+                        attachLog: true
+                    )
                 }
             }
         }
@@ -116,3 +123,4 @@ pipeline {
         }
     }
 }
+
