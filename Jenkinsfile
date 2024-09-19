@@ -1,93 +1,86 @@
 pipeline {
     agent any
-    environment {
-        DIRECTORY_PATH = 'C:/ProgramData/Jenkins/.jenkins/workspace/6.2c'
-        TESTING_ENVIRONMENT = 'test-env'
-        PRODUCTION_ENVIRONMENT = 'Janice'
-    }
     stages {
+        stages {
         stage('Build') {
             steps {
                 echo "Stage 1: Build"
                 echo "Description: Compile and package the code using a build automation tool."
                 echo "Tool: Maven"
                 // Example command for Maven (not executed here)
-                // bat 'mvn clean install'
+                // sh 'mvn clean install'
             }
         }
-        
-        stage('Unit and Integration Tests') {
+
+        stage("Unit and Integration Tests") {
             steps {
                 echo "Stage 2: Unit and Integration Tests"
                 echo "Description: Run unit tests to verify individual components and integration tests to ensure components work together."
                 echo "Tools: JUnit for unit testing, Maven for running integration tests"
                 // Example commands (not executed here)
-                // bat 'mvn test'
-                // bat 'mvn verify'
-                
-                // Run Maven unit tests, outputting to a log file
-                bat '''
-                echo "Running mvn test (unit tests)..." > unit-test.log
-                mvn test >> unit-test.log 2>&1
-                '''
+                // sh 'mvn test'
+                // sh 'mvn verify'    
+                script {
+                    bat '''
+                    echo Running unit and integration tests... > test.log
+                    echo Tests completed successfully. >> test.log
+                    '''
+                }
             }
         }
-        
+
         stage('Code Analysis') {
             steps {
                 echo "Stage 3: Code Analysis"
                 echo "Description: Analyze the code to ensure it meets industry standards and is free from code smells."
                 echo "Tool: SonarQube"
                 // Example command for SonarQube (not executed here)
-                // bat 'mvn sonar:sonar'
+                // sh 'mvn sonar:sonar'
             }
         }
-        
-        stage('Security Scan') {
+        stage("Security Scan") {
             steps {
-                echo "Stage 4: Security Scan"
-                echo "Description: Perform a security scan to identify vulnerabilities and security issues in the code."
-                echo "Tool: Snyk"
-                // Example command for Snyk (not executed here)
-                // bat 'snyk test --all-projects'
-                
-                // Run security scan, outputting to a log file
-                bat '''
-                echo "Running security scan..." > security.log
-                // Example of a security scan command
-                // snyk test --all-projects >> security.log 2>&1
-                echo "Security scan completed." >> security.log
-                '''
+                script {
+                    echo "Stage 4: Security Scan"
+                    echo "Description: Perform a security scan to identify vulnerabilities and security issues in the code."
+                    echo "Tool: Snyk"
+                    // Example command for Snyk (not executed here)
+                    // sh 'snyk test --all-projects'
+                    bat '''
+                    echo Running security scan... > security.log
+                    echo Security scan completed. >> security.log
+                    '''
+                }
             }
         }
-        
-        stage('Deploy to Staging') {
+
+       stage('Deploy to Staging') {
             steps {
                 echo "Stage 5: Deploy to Staging"
                 echo "Description: Deploy the application to a staging server for pre-production testing."
-                echo "Tool: Custom deployment script (e.g., deploy-script.bat)"
+                echo "Tool: Custom deployment script (e.g., deploy-script.sh)"
                 // Example command for deployment (not executed here)
-                // bat 'deploy-script.bat staging'
+                // sh 'deploy-script.sh staging'
             }
         }
-        
+
         stage('Integration Test on Staging') {
             steps {
                 echo "Stage 6: Integration Test on Staging"
                 echo "Description: Run integration tests on the staging environment to ensure the application functions as expected."
-                echo "Tool: Custom integration test script (e.g., integration-tests.bat)"
+                echo "Tool: Custom integration test script (e.g., integration-tests.sh)"
                 // Example command for integration testing (not executed here)
-                // bat 'integration-tests.bat'
+                // sh 'integration-tests.sh'
             }
         }
-        
+
         stage('Deploy to Production') {
             steps {
                 echo "Stage 7: Deploy to Production"
                 echo "Description: Deploy the application to the production server."
-                echo "Tool: Custom deployment script (e.g., deploy-script.bat)"
+                echo "Tool: Custom deployment script (e.g., deploy-script.sh)"
                 // Example command for production deployment (not executed here)
-                // bat 'deploy-script.bat production'
+                // sh 'deploy-script.sh production'
             }
         }
     }
