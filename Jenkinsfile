@@ -1,46 +1,58 @@
 pipeline {
     agent any
+    environment {
+        DIRECTORY_PATH = 'C:/ProgramData/Jenkins/.jenkins/workspace/6.2c'
+        TESTING_ENVIRONMENT = 'test-env'
+        PRODUCTION_ENVIRONMENT = 'Janice'
+    }
     stages {
-        stage("Build") {
+        stage('Build') {
             steps {
-                script {
-                    // For Windows use 'bat', for Linux use 'sh'
-                    bat '''
-                    echo Building the project... > build.log
-                    echo Build completed. >> build.log
-                    '''
-                }
+                echo "Stage 1: Build"
+                echo "Description: Compile and package the code using a build automation tool."
+                echo "Tool: Maven"
+                // Example command for Maven (not executed here)
+                // sh 'mvn clean install'
             }
         }
-
-        stage("Unit and Integration Tests") {
+        
+        stage('Unit and Integration Tests') {
             steps {
-                script {
-                    // For Windows use 'bat', for Linux use 'sh'
-                    bat '''
-                    echo Running unit and integration tests... > test.log
-                    echo Tests completed successfully. >> test.log
+                echo "Stage 2: Unit and Integration Tests"
+                echo "Description: Run unit tests to verify individual components and integration tests to ensure components work together."
+                echo "Tools: JUnit for unit testing, Maven for running integration tests"
+                // Example commands (not executed here)
+                // sh 'mvn test'
+                // sh 'mvn verify'
+            }
+             script {
+                    // Run Maven unit tests, outputting to a log file
+                    sh '''
+                    echo "Running mvn test (unit tests)..." > unit-test.log
+                    mvn test >> unit-test.log 2>&1
                     '''
-                }
             }
         }
-
-        stage("Code Analysis") {
+        
+        stage('Code Analysis') {
             steps {
-                script {
-                    // For Windows use 'bat', for Linux use 'sh'
-                    bat '''
-                    echo Running code analysis... > analysis.log
-                    echo Code analysis completed. >> analysis.log
-                    '''
-                }
+                echo "Stage 3: Code Analysis"
+                echo "Description: Analyze the code to ensure it meets industry standards and is free from code smells."
+                echo "Tool: SonarQube"
+                // Example command for SonarQube (not executed here)
+                // sh 'mvn sonar:sonar'
             }
         }
-
-        stage("Security Scan") {
+        
+        stage('Security Scan') {
             steps {
-                script {
-                    // For Windows use 'bat', for Linux use 'sh'
+                echo "Stage 4: Security Scan"
+                echo "Description: Perform a security scan to identify vulnerabilities and security issues in the code."
+                echo "Tool: Snyk"
+                // Example command for Snyk (not executed here)
+                // sh 'snyk test --all-projects'
+            }
+            script {
                     bat '''
                     echo Running security scan... > security.log
                     echo Security scan completed. >> security.log
@@ -48,43 +60,38 @@ pipeline {
                 }
             }
         }
-
-        stage("Deploy to Staging") {
+        
+        stage('Deploy to Staging') {
             steps {
-                script {
-                    // For Windows use 'bat', for Linux use 'sh'
-                    bat '''
-                    echo Deploying to staging... > deploy-staging.log
-                    echo Deployment to staging completed. >> deploy-staging.log
-                    '''
-                }
+                echo "Stage 5: Deploy to Staging"
+                echo "Description: Deploy the application to a staging server for pre-production testing."
+                echo "Tool: Custom deployment script (e.g., deploy-script.sh)"
+                // Example command for deployment (not executed here)
+                // sh 'deploy-script.sh staging'
             }
         }
-
-        stage("Integration Tests on Staging") {
+        
+        stage('Integration Test on Staging') {
             steps {
-                script {
-                    // For Windows use 'bat', for Linux use 'sh'
-                    bat '''
-                    echo Running integration tests on staging... > integration-tests.log
-                    echo Integration tests on staging completed. >> integration-tests.log
-                    '''
-                }
+                echo "Stage 6: Integration Test on Staging"
+                echo "Description: Run integration tests on the staging environment to ensure the application functions as expected."
+                echo "Tool: Custom integration test script (e.g., integration-tests.sh)"
+                // Example command for integration testing (not executed here)
+                // sh 'integration-tests.sh'
             }
         }
-
-        stage("Deploy to Production") {
+        
+        stage('Deploy to Production') {
             steps {
-                script {
-                    // For Windows use 'bat', for Linux use 'sh'
-                    bat '''
-                    echo Deploying to production... > deploy-production.log
-                    echo Deployment to production completed. >> deploy-production.log
-                    '''
-                }
+                echo "Stage 7: Deploy to Production"
+                echo "Description: Deploy the application to the production server."
+                echo "Tool: Custom deployment script (e.g., deploy-script.sh)"
+                // Example command for production deployment (not executed here)
+                // sh 'deploy-script.sh production'
             }
         }
     }
+    
 
     post {
         always {
