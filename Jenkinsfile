@@ -31,6 +31,7 @@ pipeline {
                     echo "Running mvn test (unit tests)..." > unit-test.log
                     mvn test >> unit-test.log 2>&1
                     '''
+             }
             }
         }
         
