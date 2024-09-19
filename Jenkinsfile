@@ -4,10 +4,10 @@ pipeline {
         stage("Build") {
             steps {
                 script {
-                    // Create and simulate a build step with log output
-                    sh '''
-                    echo "Building the project..." > build.log
-                    echo "Build completed." >> build.log
+                    // For Windows use 'bat', for Linux use 'sh'
+                    bat '''
+                    echo Building the project... > build.log
+                    echo Build completed. >> build.log
                     '''
                 }
             }
@@ -16,10 +16,10 @@ pipeline {
         stage("Unit and Integration Tests") {
             steps {
                 script {
-                    // Simulate running tests and writing output to a log file
-                    sh '''
-                    echo "Running unit and integration tests..." > test.log
-                    echo "Tests completed successfully." >> test.log
+                    // For Windows use 'bat', for Linux use 'sh'
+                    bat '''
+                    echo Running unit and integration tests... > test.log
+                    echo Tests completed successfully. >> test.log
                     '''
                 }
             }
@@ -28,10 +28,10 @@ pipeline {
         stage("Code Analysis") {
             steps {
                 script {
-                    // Simulate running code analysis and writing output to a log file
-                    sh '''
-                    echo "Running code analysis..." > analysis.log
-                    echo "Code analysis completed." >> analysis.log
+                    // For Windows use 'bat', for Linux use 'sh'
+                    bat '''
+                    echo Running code analysis... > analysis.log
+                    echo Code analysis completed. >> analysis.log
                     '''
                 }
             }
@@ -40,10 +40,10 @@ pipeline {
         stage("Security Scan") {
             steps {
                 script {
-                    // Simulate running a security scan and writing output to a log file
-                    sh '''
-                    echo "Running security scan..." > security.log
-                    echo "Security scan completed." >> security.log
+                    // For Windows use 'bat', for Linux use 'sh'
+                    bat '''
+                    echo Running security scan... > security.log
+                    echo Security scan completed. >> security.log
                     '''
                 }
             }
@@ -52,10 +52,10 @@ pipeline {
         stage("Deploy to Staging") {
             steps {
                 script {
-                    // Simulate deployment to staging environment
-                    sh '''
-                    echo "Deploying to staging..." > deploy-staging.log
-                    echo "Deployment to staging completed." >> deploy-staging.log
+                    // For Windows use 'bat', for Linux use 'sh'
+                    bat '''
+                    echo Deploying to staging... > deploy-staging.log
+                    echo Deployment to staging completed. >> deploy-staging.log
                     '''
                 }
             }
@@ -64,10 +64,10 @@ pipeline {
         stage("Integration Tests on Staging") {
             steps {
                 script {
-                    // Simulate running integration tests in staging
-                    sh '''
-                    echo "Running integration tests on staging..." > integration-tests.log
-                    echo "Integration tests on staging completed." >> integration-tests.log
+                    // For Windows use 'bat', for Linux use 'sh'
+                    bat '''
+                    echo Running integration tests on staging... > integration-tests.log
+                    echo Integration tests on staging completed. >> integration-tests.log
                     '''
                 }
             }
@@ -76,10 +76,10 @@ pipeline {
         stage("Deploy to Production") {
             steps {
                 script {
-                    // Simulate deployment to production
-                    sh '''
-                    echo "Deploying to production..." > deploy-production.log
-                    echo "Deployment to production completed." >> deploy-production.log
+                    // For Windows use 'bat', for Linux use 'sh'
+                    bat '''
+                    echo Deploying to production... > deploy-production.log
+                    echo Deployment to production completed. >> deploy-production.log
                     '''
                 }
             }
