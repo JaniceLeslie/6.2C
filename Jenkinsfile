@@ -25,13 +25,12 @@ pipeline {
                 // sh 'mvn test'
                 // sh 'mvn verify'
             }
-             script {
-                    // Run Maven unit tests, outputting to a log file
-                    sh '''
-                    echo "Running mvn test (unit tests)..." > unit-test.log
-                    mvn test >> unit-test.log 2>&1
-                    '''
-             }
+            script {
+                // Run Maven unit tests, outputting to a log file
+                sh '''
+                echo "Running mvn test (unit tests)..." > unit-test.log
+                mvn test >> unit-test.log 2>&1
+                '''
             }
         }
         
@@ -54,11 +53,13 @@ pipeline {
                 // sh 'snyk test --all-projects'
             }
             script {
-                    bat '''
-                    echo Running security scan... > security.log
-                    echo Security scan completed. >> security.log
-                    '''
-                }
+                // Run security scan, outputting to a log file
+                sh '''
+                echo "Running security scan..." > security.log
+                # Example of a security scan command
+                # snyk test --all-projects >> security.log 2>&1
+                echo "Security scan completed." >> security.log
+                '''
             }
         }
         
@@ -92,7 +93,6 @@ pipeline {
             }
         }
     }
-    
 
     post {
         always {
