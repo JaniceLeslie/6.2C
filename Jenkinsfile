@@ -3,70 +3,98 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                echo "mvn clean package"
-                // Run the Maven clean and package commands
-                // sh 'mvn clean package' (replace with actual command)
+                script {
+                    // Create and simulate a build step with log output
+                    sh '''
+                    echo "Building the project..." > build.log
+                    echo "Build completed." >> build.log
+                    '''
+                }
             }
         }
 
         stage("Unit and Integration Tests") {
             steps {
-                echo "mvn test" 
-                // Run Maven tests (unit and integration)
-                // sh 'mvn test' (replace with actual command)
+                script {
+                    // Simulate running tests and writing output to a log file
+                    sh '''
+                    echo "Running unit and integration tests..." > test.log
+                    echo "Tests completed successfully." >> test.log
+                    '''
+                }
             }
         }
 
         stage("Code Analysis") {
             steps {
-                echo "mvn sonar:sonar" 
-                // Run code analysis using SonarQube
-                // sh 'mvn sonar:sonar' (replace with actual command)
+                script {
+                    // Simulate running code analysis and writing output to a log file
+                    sh '''
+                    echo "Running code analysis..." > analysis.log
+                    echo "Code analysis completed." >> analysis.log
+                    '''
+                }
             }
         }
 
         stage("Security Scan") {
             steps {
-                echo "mvn org.owasp:dependency-check-maven:check" 
-                // Run security scan using OWASP Dependency-Check
-                // sh 'mvn org.owasp:dependency-check-maven:check' (replace with actual command)
+                script {
+                    // Simulate running a security scan and writing output to a log file
+                    sh '''
+                    echo "Running security scan..." > security.log
+                    echo "Security scan completed." >> security.log
+                    '''
+                }
             }
         }
 
         stage("Deploy to Staging") {
             steps {
-                echo "aws deploy-to-staging-script.sh"
-                // Deploy to the staging environment (e.g., AWS EC2)
-                // sh './deploy-to-staging-script.sh' (replace with actual script)
+                script {
+                    // Simulate deployment to staging environment
+                    sh '''
+                    echo "Deploying to staging..." > deploy-staging.log
+                    echo "Deployment to staging completed." >> deploy-staging.log
+                    '''
+                }
             }
         }
 
         stage("Integration Tests on Staging") {
             steps {
-                echo "mvn verify -Pintegration-tests" 
-                // Run integration tests on the staging environment
-                // sh 'mvn verify -Pintegration-tests' (replace with actual command)
+                script {
+                    // Simulate running integration tests in staging
+                    sh '''
+                    echo "Running integration tests on staging..." > integration-tests.log
+                    echo "Integration tests on staging completed." >> integration-tests.log
+                    '''
+                }
             }
         }
 
         stage("Deploy to Production") {
             steps {
-                echo "aws deploy-to-production-script.sh"
-                // Deploy to the production environment (e.g., AWS EC2)
-                // sh './deploy-to-production-script.sh' (replace with actual script)
+                script {
+                    // Simulate deployment to production
+                    sh '''
+                    echo "Deploying to production..." > deploy-production.log
+                    echo "Deployment to production completed." >> deploy-production.log
+                    '''
+                }
             }
         }
     }
 
     post {
         always {
-            // Archive logs for both success and failure
-            archiveArtifacts artifacts: '**/*.log', allowEmptyArchive: true
+            // Archive all log files regardless of build status
+            archiveArtifacts artifacts: '*.log', allowEmptyArchive: true
         }
-        
+
         success {
             emailext(
-                attachmentsPattern: '**/*.log', // Attach log files
+                attachmentsPattern: '*.log', // Attach all log files
                 body: "The pipeline build and deployment were successful. Please find the logs attached.",
                 recipientProviders: [culprits(), developers()],
                 subject: "Pipeline Success: Build Log Attached",
@@ -76,8 +104,8 @@ pipeline {
 
         failure {
             emailext(
-                attachmentsPattern: '**/*.log', // Attach log files
-                body: "The pipeline has failed. Please check the attached log for more details.",
+                attachmentsPattern: '*.log', // Attach all log files
+                body: "The pipeline has failed. Please check the attached logs for more details.",
                 recipientProviders: [culprits(), developers()],
                 subject: "Pipeline Failed: Build Log Attached",
                 to: "30568janiceleslie74@gmail.com"
