@@ -12,7 +12,7 @@ pipeline {
                 echo "Description: Compile and package the code using a build automation tool."
                 echo "Tool: Maven"
                 // Example command for Maven (not executed here)
-                // sh 'mvn clean install'
+                // bat 'mvn clean install'
             }
         }
         
@@ -22,12 +22,12 @@ pipeline {
                 echo "Description: Run unit tests to verify individual components and integration tests to ensure components work together."
                 echo "Tools: JUnit for unit testing, Maven for running integration tests"
                 // Example commands (not executed here)
-                // sh 'mvn test'
-                // sh 'mvn verify'
+                // bat 'mvn test'
+                // bat 'mvn verify'
             }
             script {
                 // Run Maven unit tests, outputting to a log file
-                sh '''
+                bat '''
                 echo "Running mvn test (unit tests)..." > unit-test.log
                 mvn test >> unit-test.log 2>&1
                 '''
@@ -40,7 +40,7 @@ pipeline {
                 echo "Description: Analyze the code to ensure it meets industry standards and is free from code smells."
                 echo "Tool: SonarQube"
                 // Example command for SonarQube (not executed here)
-                // sh 'mvn sonar:sonar'
+                // bat 'mvn sonar:sonar'
             }
         }
         
@@ -50,14 +50,14 @@ pipeline {
                 echo "Description: Perform a security scan to identify vulnerabilities and security issues in the code."
                 echo "Tool: Snyk"
                 // Example command for Snyk (not executed here)
-                // sh 'snyk test --all-projects'
+                // bat 'snyk test --all-projects'
             }
             script {
                 // Run security scan, outputting to a log file
-                sh '''
+                bat '''
                 echo "Running security scan..." > security.log
-                # Example of a security scan command
-                # snyk test --all-projects >> security.log 2>&1
+                // Example of a security scan command
+                // snyk test --all-projects >> security.log 2>&1
                 echo "Security scan completed." >> security.log
                 '''
             }
@@ -67,9 +67,9 @@ pipeline {
             steps {
                 echo "Stage 5: Deploy to Staging"
                 echo "Description: Deploy the application to a staging server for pre-production testing."
-                echo "Tool: Custom deployment script (e.g., deploy-script.sh)"
+                echo "Tool: Custom deployment script (e.g., deploy-script.bat)"
                 // Example command for deployment (not executed here)
-                // sh 'deploy-script.sh staging'
+                // bat 'deploy-script.bat staging'
             }
         }
         
@@ -77,9 +77,9 @@ pipeline {
             steps {
                 echo "Stage 6: Integration Test on Staging"
                 echo "Description: Run integration tests on the staging environment to ensure the application functions as expected."
-                echo "Tool: Custom integration test script (e.g., integration-tests.sh)"
+                echo "Tool: Custom integration test script (e.g., integration-tests.bat)"
                 // Example command for integration testing (not executed here)
-                // sh 'integration-tests.sh'
+                // bat 'integration-tests.bat'
             }
         }
         
@@ -87,9 +87,9 @@ pipeline {
             steps {
                 echo "Stage 7: Deploy to Production"
                 echo "Description: Deploy the application to the production server."
-                echo "Tool: Custom deployment script (e.g., deploy-script.sh)"
+                echo "Tool: Custom deployment script (e.g., deploy-script.bat)"
                 // Example command for production deployment (not executed here)
-                // sh 'deploy-script.sh production'
+                // bat 'deploy-script.bat production'
             }
         }
     }
