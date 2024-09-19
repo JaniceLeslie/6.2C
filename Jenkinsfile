@@ -24,8 +24,7 @@ pipeline {
                 // Example commands (not executed here)
                 // bat 'mvn test'
                 // bat 'mvn verify'
-            }
-            script {
+                
                 // Run Maven unit tests, outputting to a log file
                 bat '''
                 echo "Running mvn test (unit tests)..." > unit-test.log
@@ -51,8 +50,7 @@ pipeline {
                 echo "Tool: Snyk"
                 // Example command for Snyk (not executed here)
                 // bat 'snyk test --all-projects'
-            }
-            script {
+                
                 // Run security scan, outputting to a log file
                 bat '''
                 echo "Running security scan..." > security.log
